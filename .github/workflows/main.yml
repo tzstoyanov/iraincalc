@@ -1,0 +1,30 @@
+name: iRainCalc CI
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron:  '0 15 * * THU'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      working-directory: ${{runner.workspace}}/
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3.10
+        sudo apt-get install libblas3 liblapack3 liblapack-dev libblas-dev -y
+        cd ${{runner.workspace}}/iraincalc/
+        python3.10 -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+        mkdir out
+        ./iraincalc.py -l ./test/links.csv -s ./test/data.csv -p ./out/wet
+        echo "Comparing the output"
+        ls -al ./out/
+        diff ./out/ ./test/out
