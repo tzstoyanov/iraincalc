@@ -1,0 +1,17 @@
+numpy
+scipy < 1.9
+pandas >= 0.22
+pyarrow
+numba
+h5py
+xarray
+sparse
+netcdf4
+shapely
+pyproj
+tqdm
+pykrige
+tensorflow
+bottleneck
+future
+git+https://github.com/pycomlink/pycomlink.git#egg=pycomlink
