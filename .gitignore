@@ -1,0 +1,11 @@
+*.orig
+*.rej
+*~
+*.pyc
+*.swp
+tags
+TAGS
+cscope*
+.cproject
+.project
+out/
